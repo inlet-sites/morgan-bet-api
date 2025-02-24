@@ -16,7 +16,7 @@ const createUserRoute = async (req, res, next)=>{
 
 const getTokenRoute = async (req, res, next)=>{
     try{
-        const user = await getUser(req.params.userId);
+        const user = await getUserWithEmail(req.body.email);
         comparePassword(user.password, req.body.password);
         const token = createToken(user);
         res.json({token: token});
@@ -27,6 +27,18 @@ const getUserRoute = async (req, res, next)=>{
     try{
         res.json(responseUser(res.locals.user));
     }catch(e){next(e)}
+}
+
+/*
+ Retrieve user by email
+ Throws http error if not found
+ @param {String} email - User email address
+ @return {User} User object
+ */
+const getUserWithEmail = async (email)=>{
+    const user = await User.findOne({email: email.toLowerCase()});
+    if(!user) throw new HttpError(401, "No user with that email");
+    return user;
 }
 
 /*
