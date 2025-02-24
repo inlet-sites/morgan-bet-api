@@ -94,6 +94,18 @@ const comparePassword = async (hashedPass, inputPass)=>{
 }
 
 /*
+ Create JWT for user authorization
+ @param {User} user - User object
+ @return {String} JWT for user authorization
+ */
+const createToken = (user)=>{
+    return jwt.sign({
+        id: user._id,
+        uuid: user.uuid
+    }, process.env.JWT_SECRET);
+}
+
+/*
  Create a User object for sending to frontend
  @param {User} user - User object
  @return {Object} Modified User object
