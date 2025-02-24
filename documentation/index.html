@@ -9,6 +9,7 @@
     <header>
         <a class="headMain" href="#user">User</a>
         <a class="headSub" href="#createUser">Create</a>
+        <a class="headSub" href="#getUserToken">Get Token</a>
         <a class="headSub" href="#getUser">Get</a>
     </header>
 
@@ -75,7 +76,33 @@
             </div>
         </article>
 
-        <article>
+        <article id="getUserToken">
+            <h1>Get User Token</h1>
+            <p class="url">POST /user/token</p>
+            <p class="description">Get user token for authorization</p>
+
+            <h3>Request Body</h3>
+            <div class="prop">
+                <p class="name">email</p>
+                <p class="type">String</p>
+                <p class="propDesc">User email address</p>
+            </div>
+
+            <div class="prop">
+                <p class="name">password</p>
+                <p class="type">String</p>
+                <p class="propDesc">User password</p>
+            </div>
+
+            <h3>Response Body</h3>
+            <div class="prop">
+                <p class="name">token</p>
+                <p class="type">String</p>
+                <p class="propDesc">User token for authorization</p>
+            </div>
+        </article>
+
+        <article id="getUser">
             <h1>Get User</h1>
             <p class="url">GET /user/:userId</p>
             <p>User auth required</p>
