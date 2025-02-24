@@ -72,9 +72,25 @@ const newUuid = ()=>{
     return crypto.randomUUID();
 }
 
+/*
+ Check if user already exists in database
+ Throw http error if user with emailalready exists
+ @param {String} email - User email address
+ */
 const uniqueUser = async (email)=>{
     const user = await User.findOne({email: email});
     if(user !== null) throw new HttpError(400, "User with this email already exists");
+}
+
+/*
+ Check input password vs saved password
+ Throw http error if passwords do not match
+ @param {String} hashedPass - Hashed password from database
+ @param {String} inputPass - User input password
+ */
+const comparePassword = async (hashedPass, inputPass)=>{
+    const result = await bcrypt.compare(inputPass, hashedPass);
+    if(result !== true) throw new HttpError(401, "Invalid credentials");
 }
 
 /*
