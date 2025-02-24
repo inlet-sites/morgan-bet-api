@@ -4,6 +4,7 @@ body{
     display: flex;
     height: 100vh;
     width: 100vw;
+    overflow-y: hidden;
 }
 
 header{
@@ -30,7 +31,7 @@ header a{
     padding-left: 15px;
 }
 
-article{
+.container{
     flex-grow: 1;
     height: 100%;
     overflow-y: auto;
@@ -38,7 +39,7 @@ article{
     padding: 35px;
 }
 
-.route{
+article{
     border-bottom: 2px solid black;
     margin-bottom: 35px;
 }

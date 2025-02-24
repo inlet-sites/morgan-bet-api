@@ -8,10 +8,11 @@
 <body>
     <header>
         <a class="headMain" href="#user">User</a>
+        <a class="headSub" href="#createUser">Create</a>
     </header>
 
     <div class="container">
-        <article>
+        <article id="user">
             <h1>User</h1>
             <p class="description">User object</p>
 
@@ -32,6 +33,44 @@
                 <p class="name">name</p>
                 <p class="type">String</p>
                 <p class="propDesc">Full name of user</p>
+            </div>
+        </article>
+
+        <article id="createUser">
+            <h1>Create User</h1>
+            <p class="url">POST /user</p>
+            <p class="description">Create a new user</p>
+
+            <h3>Request Body</h3>
+            <div class="prop">
+                <p class="name">name</p>
+                <p class="type">String</p>
+                <p class="propDesc">Full name of the user</p>
+            </div>
+
+            <div class="prop">
+                <p class="name">email</p>
+                <p class="type">String</p>
+                <p class="propDesc">Email address of the user</p>
+            </div>
+
+            <div class="prop">
+                <p class="name">password</p>
+                <p class="type">String</p>
+                <p class="propDesc">User password</p>
+            </div>
+
+            <div class="prop">
+                <p class="name">confirmPassword</p>
+                <p class="type">String</p>
+                <p class="propDesc">Confirmation password</p>
+            </div>
+
+            <h3>Response Body</h3>
+            <div class="prop">
+                <p class="name">N/A</p>
+                <p class="type"><a href="#user">User</a></p>
+                <p class="propDesc">User Object</p>
             </div>
         </article>
     </div>
