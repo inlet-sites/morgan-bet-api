@@ -14,6 +14,15 @@ const createUserRoute = async (req, res, next)=>{
     }catch(e){next(e)}
 }
 
+const getTokenRoute = async (req, res, next)=>{
+    try{
+        const user = await getUser(req.params.userId);
+        comparePassword(user.password, req.body.password);
+        const token = createToken(user);
+        res.json({token: token});
+    }next(e){catch(e)}
+}
+
 const getUserRoute = async (req, res, next)=>{
     try{
         res.json(responseUser(res.locals.user));
@@ -72,5 +81,6 @@ const responseUser = (user)=>{
 
 export {
     createUserRoute,
+    getTokenRoute,
     getUserRoute
 }
