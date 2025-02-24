@@ -14,6 +14,12 @@ const createUserRoute = async (req, res, next)=>{
     }catch(e){next(e)}
 }
 
+const getUserRoute = async (req, res, next)=>{
+    try{
+        res.json(responseUser(res.locals.user));
+    }catch(e){next(e)}
+}
+
 /*
  Create a new user object
  @param {Object} data - Data from request body
@@ -65,5 +71,6 @@ const responseUser = (user)=>{
 
 
 export {
-    createUserRoute
+    createUserRoute,
+    getUserRoute
 }

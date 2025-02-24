@@ -1,0 +1,15 @@
+meta {
+  name: Get
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8000/user/:userId
+  body: none
+  auth: none
+}
+
+params:path {
+  userId: 
+}
