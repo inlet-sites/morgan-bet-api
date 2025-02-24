@@ -26,10 +26,10 @@ export default (requiredPermission)=>{
  @param {String} key - Key of user to verify
  @return {User} - User object
  */
-const getUser = async (id, key)=>{
+const getUser = async (id, uuid)=>{
     const user = await User.findOne({_id: id});
     if(!user) throw new HttpError(401, "Unauthorized");
-    if(user.key !== key) throw new HttpError(403, "Expired token");
+    if(user.uuid !== uuid) throw new HttpError(403, "Expired token");
     return user;
 }
 

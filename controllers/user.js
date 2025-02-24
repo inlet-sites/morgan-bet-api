@@ -3,6 +3,7 @@ import {HttpError} from "../HttpError.js";
 import validate from "../validation/user.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
 
 const createUserRoute = async (req, res, next)=>{
     try{
@@ -17,10 +18,10 @@ const createUserRoute = async (req, res, next)=>{
 const getTokenRoute = async (req, res, next)=>{
     try{
         const user = await getUserWithEmail(req.body.email);
-        comparePassword(user.password, req.body.password);
+        await comparePassword(user.password, req.body.password);
         const token = createToken(user);
         res.json({token: token});
-    }next(e){catch(e)}
+    }catch(e){next(e)}
 }
 
 const getUserRoute = async (req, res, next)=>{

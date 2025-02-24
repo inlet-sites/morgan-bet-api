@@ -1,0 +1,18 @@
+meta {
+  name: Create Token
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8000/user/token
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "lee@inletsites.dev",
+    "password": "leerobertmorgan"
+  }
+}
