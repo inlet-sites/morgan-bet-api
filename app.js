@@ -3,7 +3,7 @@ import compression from "compression";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import {catchError} from "./HttpsError.js";
+import {catchError} from "./HttpError.js";
 
 import userRoutes from "./routes/user.js";
 
