@@ -5,9 +5,16 @@ meta {
 }
 
 get {
-  url: https://api.balldontlie.io/mlb/v1/games
+  url: https://api.balldontlie.io/mlb/v1/games?dates[]=2024-03-01&dates[]=2024-05-01&per_page=100&postseason=false
   body: none
   auth: none
+}
+
+params:query {
+  dates[]: 2024-03-01
+  dates[]: 2024-05-01
+  per_page: 100
+  postseason: false
 }
 
 headers {

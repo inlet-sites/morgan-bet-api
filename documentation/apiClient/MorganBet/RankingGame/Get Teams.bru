@@ -1,17 +1,13 @@
 meta {
-  name: Get Team
+  name: Get Teams
   type: http
-  seq: 2
+  seq: 1
 }
 
 get {
-  url: https://api.balldontlie.io/mlb/v1/teams/6
+  url: http://localhost:8000/rankinggame/teams/American
   body: none
   auth: bearer
-}
-
-headers {
-  Authorization: 3ccc6c15-3eed-4db6-8e18-be59421b9411
 }
 
 auth:bearer {

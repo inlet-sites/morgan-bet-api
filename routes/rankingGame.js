@@ -4,7 +4,7 @@ import {
 } from "../controllers/rankingGame.js";
 
 const rankedGameRoutes = (app)=>{
-    app.get("/rankedgame/teams/:league", auth("createGame"), getTeamsRoute);
+    app.get("/rankinggame/teams/:league", auth("createGame"), getTeamsRoute);
 }
 
 export default rankedGameRoutes;
