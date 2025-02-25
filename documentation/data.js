@@ -188,7 +188,7 @@ window.data = [
         type: "route",
         id: "rankedGameGetTeams",
         title: "Get Teams",
-        url: "GET /rankedgame/teams/:league",
+        url: "GET /rankinggame/teams/:league",
         auth: true,
         description: "Retrieve teams for ranked game",
         responseBody: [
@@ -208,5 +208,45 @@ window.data = [
                 desc: "Location of the team"
             }
         ]
+    },
+    {
+        type: "route",
+        id: "rankedGameCreate",
+        title: "Create",
+        url: "POST /rankingGame",
+        auth: true,
+        description: "Create a new ranked game",
+        requestBody: [
+            {
+                name: "teams",
+                type: "[Object]",
+                desc: "List of teams to include"
+            },
+            {
+                name: "teams.apiId",
+                type: "Number",
+                desc: "API ID of the team"
+            },
+            {
+                name: "teams.startDate",
+                type: "Date",
+                desc: "Start date to find games"
+            },
+            {
+                name: "gamesCount",
+                type: "Number",
+                desc: "Number of games to include. -1 for all games in season"
+            },
+            {
+                name: "season",
+                type: "Number",
+                desc: "Season for the games to include"
+            }
+        ],
+        responseBody: [{
+            name: "N/A",
+            type: "RankingGame",
+            desc: "RankingGame object"
+        }]
     }
 ];
