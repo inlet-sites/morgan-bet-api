@@ -138,6 +138,11 @@ window.data = [
                 desc: "Name of the team",
             },
             {
+                name: "teams.location",
+                type: "String",
+                desc: "Location of the team"
+            },
+            {
                 name: "games",
                 type: "[Object]",
                 desc: "List of games associated with this ranking game"
@@ -176,6 +181,31 @@ window.data = [
                 name: "games.teams.away.score",
                 type: "Number",
                 desc: "Score of the team in the game, if completed"
+            }
+        ]
+    },
+    {
+        type: "route",
+        id: "rankedGameGetTeams",
+        title: "Get Teams",
+        url: "GET /rankedgame/teams/:league",
+        auth: true,
+        description: "Retrieve teams for ranked game",
+        responseBody: [
+            {
+                name: "apiId",
+                type: "Number",
+                desc: "API ID of the team"
+            },
+            {
+                name: "name",
+                type: "String",
+                desc: "Name of the team"
+            },
+            {
+                name: "location",
+                type: "String",
+                desc: "Location of the team"
             }
         ]
     }

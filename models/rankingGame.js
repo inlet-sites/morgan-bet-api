@@ -5,6 +5,7 @@ const RankingGameSchema = new mongoose.Schema({
         id: mongoose.Schema.Types.ObjectId,
         picks: [String]
     }],
+    owner: mongoose.Schema.Types.ObjectId,
     teams: [{
         apiId: Number,
         name: String
