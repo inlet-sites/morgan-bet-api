@@ -31,7 +31,7 @@ header a{
     padding-left: 15px;
 }
 
-.container{
+.container, #container{
     flex-grow: 1;
     height: 100%;
     overflow-y: auto;
