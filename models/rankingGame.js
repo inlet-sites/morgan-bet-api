@@ -8,7 +8,8 @@ const RankingGameSchema = new mongoose.Schema({
     owner: mongoose.Schema.Types.ObjectId,
     teams: [{
         apiId: Number,
-        name: String
+        name: String,
+        location: String,
     }],
     games: [{
         apiId: Number,

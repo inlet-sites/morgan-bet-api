@@ -6,6 +6,7 @@ import cors from "cors";
 import {catchError} from "./HttpError.js";
 
 import userRoutes from "./routes/user.js";
+import rankingGame from "./routes/rankingGame.js";
 
 const app = express();
 global.cwd = import.meta.dirname;
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(cors());
 
 userRoutes(app);
+rankingGame(app);
 
 app.use(catchError);
 
