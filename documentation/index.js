@@ -14,7 +14,7 @@ const createHeaderItem =(type, title, id)=>{
 
 const createItem = (data)=>{
     const article = document.createElement("article");
-    article.id = `#${data.id}`;
+    article.id = data.id;
 
     const title = document.createElement("h1");
     title.textContent = data.title;
@@ -36,6 +36,7 @@ const createItem = (data)=>{
     const description = document.createElement("p");
     description.classList.add("description");
     description.textContent = data.description;
+    article.appendChild(description);
 
     if(data.properties){
         const subTitle = document.createElement("h3");
@@ -49,7 +50,7 @@ const createItem = (data)=>{
 
     if(data.requestBody){
         const subTitle = document.createElement("h3");
-        subtitle.textContent = "Request Body";
+        subTitle.textContent = "Request Body";
         article.appendChild(subTitle);
 
         for(let i = 0; i < data.requestBody.length; i++){
@@ -59,7 +60,7 @@ const createItem = (data)=>{
 
     if(data.responseBody){
         const subTitle = document.createElement("h3");
-        subtitle.textContent = "Response Body";
+        subTitle.textContent = "Response Body";
         article.appendChild(subTitle);
 
         for(let i = 0; i < data.responseBody.length; i++){
