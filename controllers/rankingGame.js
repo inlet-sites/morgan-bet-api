@@ -9,6 +9,12 @@ const getTeamsRoute = async (req, res, next)=>{
     }catch(e){next(e)}
 }
 
+const createGameRoute = async (req, res, next)=>{
+    try{
+        return null;
+    }catch(e){next(e)}
+}
+
 /*
  Fetch team data from API
  @param {String} league - "American" or "National"
@@ -44,5 +50,6 @@ const formatTeams = (teams)=>{
 }
 
 export {
-    getTeamsRoute
+    getTeamsRoute,
+    createGameRoute
 }
