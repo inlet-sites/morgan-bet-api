@@ -99,5 +99,84 @@ window.data = [
             type: "User",
             desc: "User object"
         }]
+    },
+    {
+        type: "object",
+        id: "rankingGame",
+        title: "Ranking Game",
+        auth: false,
+        description: "Ranking Game object",
+        properties: [
+            {
+                name: "players",
+                type: "[Object]",
+                desc: "Array of data on the players"
+            },
+            {
+                name: "players.id",
+                type: "String",
+                desc: "ID of the associated user"
+            },
+            {
+                name: "players.picks",
+                type: "[String]",
+                desc: "List of team IDs in order of the players picks. Lower index = lower rank"
+            },
+            {
+                name: "teams",
+                type: "[Object]",
+                desc: "List of teams involved in the game"
+            },
+            {
+                name: "teams.apiId",
+                type: "Number",
+                desc: "ID for the team in the API"
+            },
+            {
+                name: "teams.name",
+                type: "String",
+                desc: "Name of the team",
+            },
+            {
+                name: "games",
+                type: "[Object]",
+                desc: "List of games associated with this ranking game"
+            },
+            {
+                name: "games.apiId",
+                type: "Number",
+                desc: "ID of the game in the API"
+            },
+            {
+                name: "date",
+                type: "Date",
+                desc: "Date of the game"
+            },
+            {
+                name: "games.teams",
+                type: "Object",
+                desc: "Teams involed in the game"
+            },
+            {
+                name: "games.teams.home.apiId",
+                type: "Number",
+                desc: "API ID associated with the home team"
+            },
+            {
+                name: "games.teams.home.score",
+                type: "Number",
+                desc: "Score of the team in the game, if completed"
+            },
+            {
+                name: "games.teams.away.apiId",
+                type: "Number",
+                desc: "API ID associated with the away team"
+            },
+            {
+                name: "games.teams.away.score",
+                type: "Number",
+                desc: "Score of the team in the game, if completed"
+            }
+        ]
     }
 ];

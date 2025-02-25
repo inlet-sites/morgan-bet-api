@@ -1,34 +1,27 @@
 import mongoose from "mongoose";
 
 const RankingGameSchema = new mongoose.Schema({
-    users: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true
-        },
-        picks: {
-            type: [String],
-            required: false
-        }
-    },
+    players: [{
+        id: mongoose.Schema.Types.ObjectId,
+        picks: [String]
+    }],
     teams: [{
-        apiId: Number
+        apiId: Number,
         name: String
-        league: String
     }],
     games: [{
-        apiId: Number
+        apiId: Number,
+        date: Date,
         teams: {
             home: {
-                id: Number,
+                apiId: Number,
                 score: Number
             },
             away: {
-                id: Number,
+                apiId: Number,
                 score: Number
             }
-        },
-        date: Date
+        }
     }]
 });
 
