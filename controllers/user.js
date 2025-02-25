@@ -52,7 +52,8 @@ const createUser = async (data)=>{
         name: data.name,
         email: data.email.toLowerCase(),
         password: await hashPass(data.password),
-        uuid: newUuid()
+        uuid: newUuid(),
+        active: true
     });
 }
 

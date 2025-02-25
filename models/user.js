@@ -16,7 +16,12 @@ const UserSchema  = new mongoose.Schema({
     uuid: {
         type: String,
         required: true
+    },
+    active: {
+        type: Boolean,
+        required: true
     }
+    permissions: [String],
 });
 
 export default mongoose.model("user", UserSchema);
