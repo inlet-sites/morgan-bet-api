@@ -7,6 +7,7 @@ import {catchError} from "./HttpError.js";
 
 import userRoutes from "./routes/user.js";
 import mlbTeamRoutes from "./routes/mlbTeam.js";
+import rankingGameRoutes from "./routes/rankingGame.js";
 
 const app = express();
 global.cwd = import.meta.dirname;
@@ -23,6 +24,7 @@ app.use(cors());
 
 userRoutes(app);
 mlbTeamRoutes(app);
+rankingGameRoutes(app);
 
 app.use(catchError);
 
