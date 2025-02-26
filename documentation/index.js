@@ -68,6 +68,16 @@ const createItem = (data)=>{
         }
     }
 
+    if(data.queries){
+        const subTitle = document.createElement("h3");
+        subTitle.textContent = "Query Parameters";
+        article.appendChild(subTitle);
+
+        for(let i = 0; i < data.queries.length; i++){
+            article.appendChild(createProp(data.queries[i]))
+        }
+    }
+
     return article;
 }
 

@@ -133,5 +133,20 @@ window.data = [
                 desc: "Team's division"
             }
         ]
+    },
+    {
+        type: "route",
+        id: "getMLBTeams",
+        title: "Get",
+        url: "GET /mlb/teams?",
+        auth: true,
+        description: "Retrieve MLB teams",
+        queries: [
+            {
+                name: "league",
+                type: "String",
+                desc: "Name of the league to retrieve teams for. 'all' for all teams"
+            }
+        ]
     }
 ];

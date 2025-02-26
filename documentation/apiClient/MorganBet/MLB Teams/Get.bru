@@ -1,0 +1,19 @@
+meta {
+  name: Get
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://localhost:8000/mlb/team?league=all
+  body: none
+  auth: bearer
+}
+
+params:query {
+  league: all
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmNlZTczNmNjYzM4MTk4NDg0NDU1ZSIsInV1aWQiOiIxZTUzMGNhZC01ODdmLTQ5NDYtYTIzZi0wYzZhZjZjNDE3MzMiLCJpYXQiOjE3NDA1ODQ2MjN9.xz61C-_9L7IomaA-EJ7Em3ZysWRx-bgUgxItz7wv2K4
+}
