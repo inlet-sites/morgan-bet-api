@@ -5,6 +5,10 @@ const GameSchema  = new mongoose.Schema({
         type: Number,
         required: true
     },
+    date: {
+        type: Date,
+        required: true
+    },
     homeTeam: {
         team: {
             type: mongoose.Schema.Types.ObjectId,
@@ -29,26 +33,24 @@ const GameSchema  = new mongoose.Schema({
     },
     awayTeam: {
         team: {
-            team: {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true
-            },
-            hits: {
-                type: Number,
-                required: false
-            },
-            runs: {
-                type: Number,
-                required: false
-            },
-            errors: {
-                type: Number,
-                required: false
-            },
-            inningScores: {
-                type: [Number],
-                required: false
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
+        },
+        hits: {
+            type: Number,
+            required: false
+        },
+        runs: {
+            type: Number,
+            required: false
+        },
+        errors: {
+            type: Number,
+            required: false
+        },
+        inningScores: {
+            type: [Number],
+            required: false
         }
     }
 });
