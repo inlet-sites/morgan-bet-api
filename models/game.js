@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const GameSchema  = new mongoose.Schema({
+const MlbGameSchema  = new mongoose.Schema({
     apiId: {
         type: Number,
         required: true
@@ -55,4 +55,4 @@ const GameSchema  = new mongoose.Schema({
     }
 });
 
-export default mongoose.model("game", GameSchema);
+export default mongoose.model("mlbGame", MlbGameSchema);

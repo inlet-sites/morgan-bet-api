@@ -99,5 +99,39 @@ window.data = [
             type: "User",
             desc: "User object"
         }]
+    },
+    {
+        type: "object",
+        title: "MLB Team",
+        id: "mlbTeam",
+        auth: false,
+        description: "Team object for MLB",
+        properties: [
+            {
+                name: "id",
+                type: "String",
+                desc: "Unique ID of the team"
+            },
+            {
+                name: "name",
+                type: "String",
+                desc: "Team name"
+            },
+            {
+                name: "location",
+                type: "String",
+                desc: "Location of the team"
+            },
+            {
+                name: "league",
+                type: "String",
+                desc: "Team's league"
+            },
+            {
+                name: "division",
+                type: "String",
+                desc: "Team's division"
+            }
+        ]
     }
 ];

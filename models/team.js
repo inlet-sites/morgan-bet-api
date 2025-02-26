@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const TeamSchema = new mongoose.Schema({
+const MlbTeamSchema = new mongoose.Schema({
     apiId: {
         type: Number,
         required: true
@@ -23,4 +23,4 @@ const TeamSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.model("team", TeamSchema);
+export default mongoose.model("mlbTeam", MlbTeamSchema);
