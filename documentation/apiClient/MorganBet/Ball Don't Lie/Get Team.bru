@@ -5,15 +5,15 @@ meta {
 }
 
 get {
-  url: https://api.balldontlie.io/mlb/v1/teams/6
+  url: https://api.balldontlie.io/mlb/v1/teams?league=American
   body: none
-  auth: bearer
+  auth: none
+}
+
+params:query {
+  league: American
 }
 
 headers {
   Authorization: 3ccc6c15-3eed-4db6-8e18-be59421b9411
-}
-
-auth:bearer {
-  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmNlZTczNmNjYzM4MTk4NDg0NDU1ZSIsInV1aWQiOiIxZTUzMGNhZC01ODdmLTQ5NDYtYTIzZi0wYzZhZjZjNDE3MzMiLCJpYXQiOjE3NDA1MTkzMDV9.iJKstyVGwWF7RupLpc7EPV0wAGDYjaNW65TAh8ospQA
 }

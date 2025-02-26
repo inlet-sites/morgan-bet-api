@@ -1,0 +1,83 @@
+meta {
+  name: Create
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/rankinggame
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmNlZTczNmNjYzM4MTk4NDg0NDU1ZSIsInV1aWQiOiIxZTUzMGNhZC01ODdmLTQ5NDYtYTIzZi0wYzZhZjZjNDE3MzMiLCJpYXQiOjE3NDA1ODQ2MjN9.xz61C-_9L7IomaA-EJ7Em3ZysWRx-bgUgxItz7wv2K4
+}
+
+body:json {
+  {
+    "gamesCount": 81,
+    "teams": [
+      {
+        "apiId": 6,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 8,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 10,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 11,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 13,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 20,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 25,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 28,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 3,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 4,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 19,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 27,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 29,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 12,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      },
+      {
+        "apiId": 17,
+        "startDate": "2025-02-26T15:48:29.567Z"
+      }
+    ]
+  }
+}

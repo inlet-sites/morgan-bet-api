@@ -1,0 +1,22 @@
+meta {
+  name: test
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://api.balldontlie.io/mlb/v1/games?per_page=81&dates[]=2025-02-26&dates[]=2025-09-26&team_ids[]=6
+  body: none
+  auth: none
+}
+
+params:query {
+  per_page: 81
+  dates[]: 2025-02-26
+  dates[]: 2025-09-26
+  team_ids[]: 6
+}
+
+headers {
+  Authorization: 3ccc6c15-3eed-4db6-8e18-be59421b9411
+}

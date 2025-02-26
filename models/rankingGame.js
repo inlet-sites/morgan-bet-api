@@ -10,20 +10,11 @@ const RankingGameSchema = new mongoose.Schema({
         apiId: Number,
         name: String,
         location: String,
-    }],
-    games: [{
-        apiId: Number,
-        date: Date,
-        teams: {
-            home: {
-                apiId: Number,
-                score: Number
-            },
-            away: {
-                apiId: Number,
-                score: Number
-            }
-        }
+        games: [{
+            apiId: Number,
+            date: Date,
+            win: Boolean
+        }]
     }]
 });
 

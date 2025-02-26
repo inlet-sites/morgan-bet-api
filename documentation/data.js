@@ -143,44 +143,24 @@ window.data = [
                 desc: "Location of the team"
             },
             {
-                name: "games",
+                name: "teams.games",
                 type: "[Object]",
                 desc: "List of games associated with this ranking game"
             },
             {
-                name: "games.apiId",
+                name: "teams.games.apiId",
                 type: "Number",
                 desc: "ID of the game in the API"
             },
             {
-                name: "date",
+                name: "teams.games.date",
                 type: "Date",
                 desc: "Date of the game"
             },
             {
-                name: "games.teams",
-                type: "Object",
-                desc: "Teams involed in the game"
-            },
-            {
-                name: "games.teams.home.apiId",
-                type: "Number",
-                desc: "API ID associated with the home team"
-            },
-            {
-                name: "games.teams.home.score",
-                type: "Number",
-                desc: "Score of the team in the game, if completed"
-            },
-            {
-                name: "games.teams.away.apiId",
-                type: "Number",
-                desc: "API ID associated with the away team"
-            },
-            {
-                name: "games.teams.away.score",
-                type: "Number",
-                desc: "Score of the team in the game, if completed"
+                name: "teams.games.win",
+                type: "Boolean",
+                desc: "Whether game is a win for the team. Only if game completed"
             }
         ]
     },

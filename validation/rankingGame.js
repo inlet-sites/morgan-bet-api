@@ -9,7 +9,7 @@ const validateTeams = (teams)=>{
     for(let i = 0; i < teams.length; i++){
         if(!Number.isInteger(teams[i].apiId)) throw new HttpError(401, "Invalid API ID");
         const date = new Date(teams[i].startDate);
-        if(!isNaN(date.getTime())) throw new HttpError(401, "Invalid start date");
+        if(isNaN(date.getTime())) throw new HttpError(401, "Invalid start date");
     }
 }
 
