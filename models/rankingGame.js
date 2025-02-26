@@ -2,20 +2,28 @@ import mongoose from "mongoose";
 
 const RankingGameSchema = new mongoose.Schema({
     players: [{
-        id: mongoose.Schema.Types.ObjectId,
-        picks: [String]
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
+        },
+        picks: {
+            type: [mongoose.Schema.Types.ObjectId],
+            required: false
+        }
     }],
-    owner: mongoose.Schema.Types.ObjectId,
-    teams: [{
-        apiId: Number,
-        name: String,
-        location: String,
-        games: [{
-            apiId: Number,
-            date: Date,
-            win: Boolean
-        }]
-    }]
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    season: {
+        type: Number,
+        required: true
+    },
+    //enum: "full", "firstHalf", "secondHalf"
+    part: {
+        type: String,
+        required: true
+    }
 });
 
 export default mongoose.model("rankingGame", RankingGameSchema);
