@@ -187,5 +187,25 @@ window.data = [
                 desc: "'full', 'firstHalf', or 'secondHalf'"
             }
         ]
+    },
+    {
+        type: "route",
+        id: "createRankingGame",
+        title: "Create",
+        url: "POST /rankinggame",
+        auth: true,
+        description: "Create a new Ranking Game",
+        requestBody: [
+            {
+                name: "season",
+                type: "Number",
+                desc: "Season to create game for. Year"
+            },
+            {
+                name: "part",
+                type: "String",
+                desc: "'full', 'firstHalf', 'secondHalf'"
+            }
+        ]
     }
 ];
