@@ -148,5 +148,44 @@ window.data = [
                 desc: "Name of the league to retrieve teams for. 'all' for all teams"
             }
         ]
+    },
+    {
+        type: "object",
+        title: "Ranking Game",
+        id: "rankingGame",
+        auth: false,
+        description: "Ranking Game object",
+        properties: [
+            {
+                name: "players",
+                type: "[Object]",
+                desc: "List of the players and their data"
+            },
+            {
+                name: "players.id",
+                type: "String",
+                desc: "ID of the player (User)"
+            },
+            {
+                name: "players.picks",
+                type: "[String]",
+                desc: "List of Team IDs for the users picks."
+            },
+            {
+                name: "owner",
+                type: "[Object]",
+                desc: "ID of the owner of the game"
+            },
+            {
+                name: "season",
+                type: "Number",
+                desc: "Year for the season"
+            },
+            {
+                name: "part",
+                type: "String",
+                desc: "'full', 'firstHalf', or 'secondHalf'"
+            }
+        ]
     }
 ];
