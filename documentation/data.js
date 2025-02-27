@@ -222,7 +222,7 @@ window.data = [
         type: "route",
         id: "rankingGameJoinRequest",
         title: "Join Request",
-        url: "PUT /rankinggame/request",
+        url: "PUT /rankinggame/:rankingGameId/join",
         auth: true,
         description: "User make request to join a Ranking Game",
         responseBody: [{
