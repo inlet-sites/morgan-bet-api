@@ -185,6 +185,11 @@ window.data = [
                 name: "part",
                 type: "String",
                 desc: "'full', 'firstHalf', or 'secondHalf'"
+            },
+            {
+                name: "joinByDate",
+                type: "Date",
+                desc: "Final date to join the game"
             }
         ]
     },
@@ -205,6 +210,11 @@ window.data = [
                 name: "part",
                 type: "String",
                 desc: "'full', 'firstHalf', 'secondHalf'"
+            },
+            {
+                name: "joinByDate",
+                type: "Date",
+                desc: "Final date to join the game"
             }
         ]
     },

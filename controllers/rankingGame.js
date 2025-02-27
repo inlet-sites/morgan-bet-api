@@ -20,7 +20,8 @@ const createGame = (data, user)=>{
         owner: user._id,
         season: data.season,
         part: data.part,
-        joinRequests: []
+        joinRequests: [],
+        joinByDate: new Date(data.joinByDate)
     });
 }
 

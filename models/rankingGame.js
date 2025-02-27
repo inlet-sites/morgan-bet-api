@@ -27,6 +27,10 @@ const RankingGameSchema = new mongoose.Schema({
     joinRequests: {
         type: [mongoose.Schema.Types.ObjectId],
         required: false
+    },
+    joinByDate: {
+        type: Date,
+        required: true
     }
 });
 
