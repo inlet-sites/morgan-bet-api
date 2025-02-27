@@ -248,5 +248,23 @@ window.data = [
             type: "true",
             desc: "Always '{success: true}' if no error"
         }]
+    },
+    {
+        type: "route",
+        id: "rankingGameMakePicks",
+        title: "Update picks",
+        url: "PUT /rankinggame/:rankingGameId/picks",
+        auth: true,
+        description: "Create the picks for a user",
+        requestBody: [{
+            name: "picks",
+            type: "[String]",
+            desc: "Array of Team IDs in order"
+        }],
+        responseBody: [{
+            name: "N/A",
+            type: "RankingGame",
+            desc: "Updated RankingGame object"
+        }]
     }
 ];

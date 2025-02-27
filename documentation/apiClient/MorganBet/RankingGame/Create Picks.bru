@@ -1,15 +1,21 @@
 meta {
-  name: Join Request
+  name: Create Picks
   type: http
-  seq: 2
+  seq: 4
 }
 
 put {
-  url: http://localhost:8000/rankinggame/67c0ba6f5d58c7a2b578d320/join
-  body: none
+  url: http://localhost:8000/rankinggame/67c0ba6f5d58c7a2b578d320/picks
+  body: json
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmNlZTczNmNjYzM4MTk4NDg0NDU1ZSIsInV1aWQiOiIxZTUzMGNhZC01ODdmLTQ5NDYtYTIzZi0wYzZhZjZjNDE3MzMiLCJpYXQiOjE3NDA2Nzk3MjB9.YO1WewX6M8qVRnZsMd-c0yunv7rGikxes-gvi9G_GCY
+}
+
+body:json {
+  {
+    "picks": ["67c0ba6f5d58c7a2b578d320", "67bcee736ccc38198484455e", "67c0bb004d704caede0343a2", "67bcee736ccc38198484455e"]
+  }
 }

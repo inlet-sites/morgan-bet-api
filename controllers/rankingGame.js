@@ -30,6 +30,17 @@ const acceptRequestRoute = async (req, res, next)=>{
     }catch(e){next(e)}
 }
 
+const createPicksRoute = async (req, res, next)=>{
+    try{
+        const game = await getGame(req.params.rankingGameId);
+        const player = getPlayer(game, res.locals.user);
+        if(player.picks.length > 0) throw new HttpError(401, "You have already made your picks");
+        player.picks = req.body.picks;
+        await game.save();
+        res.json(responseGame(game));
+    }catch(e){next(e)}
+}
+
 /*
  Retrieve a game from the database
  Throws error if game doesn't exist
@@ -121,6 +132,19 @@ const acceptJoinRequest = (game, userId)=>{
 }
 
 /*
+ Retrieve player from the Game
+ Throw error if no player
+ @param {Game} game - Game object
+ @param {User} user - User object
+ @return {Object} Player from the game object
+ */
+const getPlayer = (game, user)=>{
+    const player = game.players.find(p => p.user.toString() === user._id.toString());
+    if(!player) throw new HttpError(401, "You have not joined this game");
+    return player;
+}
+
+/*
  Create modified game object for frontend
  @param {Game} game - Game object
  @return {Object} Modified game object
@@ -138,5 +162,6 @@ const responseGame = (game)=>{
 export {
     createGameRoute,
     joinRequestRoute,
-    acceptRequestRoute
+    acceptRequestRoute,
+    createPicksRoute
 }
