@@ -22,8 +22,8 @@ const joinRequestRoute = async (req, res, next)=>{
 
 const acceptRequestRoute = async (req, res, next)=>{
     try{
-        const game = await GetGame(req.params.rankingGameId);
-        checkOwnership(game, user);
+        const game = await getGame(req.params.rankingGameId);
+        checkOwnership(game, res.locals.user);
         acceptJoinRequest(game, req.body.user);
         await game.save();
         res.json({success: true});
@@ -85,12 +85,49 @@ const checkJoinByDate = (game)=>{
 }
 
 /*
+ Throw error if user is not owner of game
+ @param {Game} game - Game object
+ @param {User} user - User object
+ */
+const checkOwnership = (game, user)=>{
+    if(game.owner.toString() !== user._id.toString()){
+        throw new HttpError(401, "Forbidden");
+    }
+}
+
+/*
+ Move a user from requested to join, to a player
+ @param {Game} game - Game object
+ @param {String} userId - ID of the user to accept
+ @return {Game} Updated game object
+ */
+const acceptJoinRequest = (game, userId)=>{
+    let exists = false;
+    for(let i = 0; i < game.joinRequests.length; i++){
+        if(game.joinRequests[i].toString() === userId){
+            exists = true;
+            game.joinRequests.splice(i, 1);
+            break;
+        }
+    }
+    if(!exists) throw new HttpError(401, "No request for that user");
+
+    game.players.push({
+        user: userId,
+        picks: []
+    });
+
+    return game;
+}
+
+/*
  Create modified game object for frontend
  @param {Game} game - Game object
  @return {Object} Modified game object
  */
 const responseGame = (game)=>{
     return {
+        id: game._id.toString(),
         players: game.players,
         owner: game.owner.toString(),
         season: game.season,
