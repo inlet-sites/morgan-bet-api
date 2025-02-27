@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 export default (requiredPermission)=>{
     return async (req, res, next)=>{
         try{
+            if(!req.headers.authorization) throw new HttpError(401, "Unauthorized");
             const [bearer, token] = req.headers.authorization.split(" ");
             if(bearer !== "Bearer") throw new HttpError(401, "Unauthorized");
             const userData = jwt.verify(token, process.env.JWT_SECRET);

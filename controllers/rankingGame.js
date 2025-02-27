@@ -1,5 +1,14 @@
 import Game from "../models/rankingGame.js";
+import User from "../models/user.js";
 import {HttpError} from "../HttpError.js";
+
+const getGameRoute = async (req, res, next)=>{
+    try{
+        const game = await getGame(req.params.rankingGameId);
+        isPlayerOrOwner(game, res.locals.user);
+        res.json(responseGame(game));
+    }catch(e){next(e)}
+}
 
 const createGameRoute = async (req, res, next)=>{
     try{
@@ -22,9 +31,11 @@ const joinRequestRoute = async (req, res, next)=>{
 
 const acceptRequestRoute = async (req, res, next)=>{
     try{
-        const game = await getGame(req.params.rankingGameId);
+        const gamePromise = getGame(req.params.rankingGameId);
+        const userPromise = getUser(req.body.user);
+        const [game, user] = await Promise.all([gamePromise, userPromise]);
         checkOwnership(game, res.locals.user);
-        acceptJoinRequest(game, req.body.user);
+        acceptJoinRequest(game, user);
         await game.save();
         res.json({success: true});
     }catch(e){next(e)}
@@ -51,6 +62,18 @@ const getGame = async (id)=>{
     const game = await Game.findOne({_id: id});
     if(!game) throw new HttpError(401, "No Ranking Game with this ID");
     return game;
+}
+
+/*
+ Retrieve a user form the database
+ Throws error if user doesn't exist
+ @param {String} id - User ID
+ @return {User} User object
+ */
+const getUser = async (id)=>{
+    const user = await User.findOne({_id: id});
+    if(!user) throw new HttpError(401, "No user with this id");
+    return user;
 }
 
 /*
@@ -109,10 +132,11 @@ const checkOwnership = (game, user)=>{
 /*
  Move a user from requested to join, to a player
  @param {Game} game - Game object
- @param {String} userId - ID of the user to accept
+ @param {User} user - User object
  @return {Game} Updated game object
  */
-const acceptJoinRequest = (game, userId)=>{
+const acceptJoinRequest = (game, user)=>{
+    const userId = user._id.toString();
     let exists = false;
     for(let i = 0; i < game.joinRequests.length; i++){
         if(game.joinRequests[i].toString() === userId){
@@ -125,6 +149,7 @@ const acceptJoinRequest = (game, userId)=>{
 
     game.players.push({
         user: userId,
+        name: user.name,
         picks: []
     });
 
@@ -145,6 +170,19 @@ const getPlayer = (game, user)=>{
 }
 
 /*
+ Throw error if user is not allowed access to game
+ @param {Game} game - Game object
+ @param {User} user - User object
+ */
+const isPlayerOrOwner = (game, user)=>{
+    const userId = user._id.toString();
+    if(
+        !game.players.find(p => p.user.toString() === userId) &&
+        owner.toString() !== userId
+    ) throw new HttpError(403, "Forbidden");
+}
+
+/*
  Create modified game object for frontend
  @param {Game} game - Game object
  @return {Object} Modified game object
@@ -160,6 +198,7 @@ const responseGame = (game)=>{
 }
 
 export {
+    getGameRoute,
     createGameRoute,
     joinRequestRoute,
     acceptRequestRoute,

@@ -6,6 +6,10 @@ const RankingGameSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             required: true
         },
+        name: {
+            type: String,
+            required: true
+        },
         picks: {
             type: [mongoose.Schema.Types.ObjectId],
             required: false

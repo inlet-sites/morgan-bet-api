@@ -195,6 +195,19 @@ window.data = [
     },
     {
         type: "route",
+        id: "getRankingGame",
+        title: "Get",
+        url: "GET /rankinggame/:rankingGameId",
+        auth: true,
+        description: "Get a specific Ranking Game",
+        responseBody: [{
+            name: "N/A",
+            type: "RankingGame",
+            desc: "RankingGame object"
+        }]
+    },
+    {
+        type: "route",
         id: "createRankingGame",
         title: "Create",
         url: "POST /rankinggame",
