@@ -230,5 +230,23 @@ window.data = [
             type: "true",
             desc: "Always '{success: true}' if no error"
         }]
+    },
+    {
+        type: "route",
+        id: "rankingGameAcceptRequest",
+        title: "Accept Join Request",
+        url: "PUT /rankinggame/:rankingGameId/accept",
+        auth: true,
+        description: "Owner accept request to join a Ranking Game",
+        requestBody: [{
+            name: "user",
+            type: "String",
+            desc: "ID of the user to accept their request"
+        }],
+        responseBody: [{
+            name: "success",
+            type: "true",
+            desc: "Always '{success: true}' if no error"
+        }]
     }
 ];
