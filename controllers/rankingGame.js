@@ -20,6 +20,16 @@ const joinRequestRoute = async (req, res, next)=>{
     }catch(e){next(e)}
 }
 
+const acceptRequestRoute = async (req, res, next)=>{
+    try{
+        const game = await GetGame(req.params.rankingGameId);
+        checkOwnership(game, user);
+        acceptJoinRequest(game, req.body.user);
+        await game.save();
+        res.json({success: true});
+    }catch(e){next(e)}
+}
+
 /*
  Retrieve a game from the database
  Throws error if game doesn't exist
@@ -90,5 +100,6 @@ const responseGame = (game)=>{
 
 export {
     createGameRoute,
-    joinRequestRoute
+    joinRequestRoute,
+    acceptRequestRoute
 }
