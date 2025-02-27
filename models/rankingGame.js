@@ -23,6 +23,10 @@ const RankingGameSchema = new mongoose.Schema({
     part: {
         type: String,
         required: true
+    },
+    joinRequests: {
+        type: [mongoose.Schema.Types.ObjectId],
+        required: false
     }
 });
 

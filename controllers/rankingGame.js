@@ -19,7 +19,8 @@ const createGame = (data, user)=>{
         players: [],
         owner: user._id,
         season: data.season,
-        part: data.part
+        part: data.part,
+        joinRequests: []
     });
 }
 

@@ -207,5 +207,18 @@ window.data = [
                 desc: "'full', 'firstHalf', 'secondHalf'"
             }
         ]
+    },
+    {
+        type: "route",
+        id: "rankingGameJoinRequest",
+        title: "Join Request",
+        url: "PUT /rankinggame/request",
+        auth: true,
+        description: "User make request to join a Ranking Game",
+        responseBody: [{
+            name: "success",
+            type: "true",
+            desc: "Always '{success: true}' if no error"
+        }]
     }
 ];
