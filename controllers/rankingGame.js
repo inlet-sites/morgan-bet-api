@@ -111,6 +111,7 @@ const getTeams = async (league)=>{
  */
 const createGame = (data, user)=>{
     return new Game({
+        name: data.name,
         players: [],
         owner: user._id,
         season: data.season,

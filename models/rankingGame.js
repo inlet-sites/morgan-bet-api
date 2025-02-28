@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const RankingGameSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
     players: [{
         user: {
             type: mongoose.Schema.Types.ObjectId,

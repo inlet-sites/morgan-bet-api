@@ -195,8 +195,21 @@ window.data = [
     },
     {
         type: "route",
+        id: "getRankingGames",
+        title: "Get User Games",
+        url: "GET /rankinggame",
+        auth: true,
+        description: "Get all of the games associated with a user. Returns array of Ranking Games",
+        responseBody: [{
+            name: "N/A",
+            type: "RankingGame",
+            desc: "Ranking Game object"
+        }]
+    },
+    {
+        type: "route",
         id: "getRankingGame",
-        title: "Get",
+        title: "Get One",
         url: "GET /rankinggame/:rankingGameId",
         auth: true,
         description: "Get a specific Ranking Game",
@@ -249,6 +262,11 @@ window.data = [
         auth: true,
         description: "Create a new Ranking Game",
         requestBody: [
+            {
+                name: "name",
+                type: "String",
+                desc: "Name of the game"
+            },
             {
                 name: "season",
                 type: "Number",
