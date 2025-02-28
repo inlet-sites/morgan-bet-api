@@ -8,7 +8,6 @@ if(process.env.NODE_ENV === "product"){
     mongoString = `mongodb://website:${process.env.MONGODB_PASS}@127.0.0.1:27017/morganbet?authSource=admin`;
 }
 mongoose.connect(mongoString);
-let thing = 0;
 
 const getGames = (season, cursor)=>{
     let url = `https://api.balldontlie.io/mlb/v1/games?seasons[]=${season}&per_page=100&postseason=false`;
@@ -31,8 +30,14 @@ const getGames = (season, cursor)=>{
                 const game = new Game({
                     apiId: games[i].id,
                     date: new Date(games[i].date),
-                    homeTeam: {team: homeTeam._id},
-                    awayTeam: {team: awayTeam._id}
+                    homeTeam : {
+                        team: homeTeam._id,
+                        ...games[i].home_team_data
+                    },
+                    awayTeam: {
+                        team: awayTeam._id,
+                        ...games[i].away_team_data
+                    }
                 });
 
                 dbGames.push(game.save());
@@ -40,9 +45,6 @@ const getGames = (season, cursor)=>{
 
             Promise.all(dbGames);
 
-            console.log(thing);
-            thing++;
-            console.log(response.data.meta);
             if(response.data.meta.next_cursor){
                 getGames(season, response.data.meta.next_cursor);
             }else{

@@ -12,7 +12,7 @@ const getGameRoute = async (req, res, next)=>{
     }catch(e){next(e)}
 }
 
-const getWinsRoute = async (req, res, next)=>{
+const getTeamsRoute = async (req, res, next)=>{
     try{
         const game = await getGame(req.params.rankingGameId);
         isPlayerOrOwner(game, res.locals.user);
@@ -231,7 +231,7 @@ const getTeamWins = async (teams, season, part)=>{
             {$sort: {date: -1}}
         ])
             .then((games)=>{
-                const firstGame= part === "secondHalf" ? 81 : 0;
+                const firstGame = part === "secondHalf" ? 81 : 0;
                 const lastGame = part === "firstHalf" ? 81 : games.length;
 
                 return {
@@ -243,7 +243,7 @@ const getTeamWins = async (teams, season, part)=>{
                 };
             })
             .catch((err)=>{
-                console.log(err);
+                console.error(err);
             });
 
         promises.push(teamPromise);
@@ -282,7 +282,7 @@ const responseGame = (game)=>{
 
 export {
     getGameRoute,
-    getWinsRoute,
+    getTeamsRoute,
     createGameRoute,
     joinRequestRoute,
     acceptRequestRoute,
