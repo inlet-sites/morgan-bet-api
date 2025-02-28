@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import axios from "axios";
-import Team from "../models/team.js";
+import Team from "../models/mlbTeam.js";
 
 let mongoString = "mongodb://127.0.0.1/morganbet";
 if(process.env.NODE_ENV === "product"){

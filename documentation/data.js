@@ -208,6 +208,41 @@ window.data = [
     },
     {
         type: "route",
+        id: "rankingGameGetTeams",
+        title: "Get Team Data",
+        url: "GET /rankinggame/:rankingGameId/team",
+        auth: true,
+        description: "Get teams with list of wins. Reponse is an array of teams.",
+        responseBody: [
+            {
+                name: "id",
+                type: "String",
+                desc: "ID of the team"
+            },
+            {
+                name: "name",
+                type: "String",
+                desc: "Team name"
+            },
+            {
+                name: "location",
+                type: "String",
+                desc: "Team location"
+            },
+            {
+                name: "league",
+                type: "String",
+                desc: "League that the team is in"
+            },
+            {
+                name: "wins",
+                type: "Number",
+                desc: "Number of wins for this team in this game"
+            }
+        ]
+    },
+    {
+        type: "route",
         id: "createRankingGame",
         title: "Create",
         url: "POST /rankinggame",
@@ -223,6 +258,11 @@ window.data = [
                 name: "part",
                 type: "String",
                 desc: "'full', 'firstHalf', 'secondHalf'"
+            },
+            {
+                name: "league",
+                type: "String",
+                desc: "'american', 'national', 'all'"
             },
             {
                 name: "joinByDate",

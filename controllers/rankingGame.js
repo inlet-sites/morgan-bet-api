@@ -1,5 +1,7 @@
 import Game from "../models/rankingGame.js";
 import User from "../models/user.js";
+import Team from "../models/mlbTeam.js";
+import MlbGame from "../models/mlbGame.js";
 import {HttpError} from "../HttpError.js";
 
 const getGameRoute = async (req, res, next)=>{
@@ -7,6 +9,16 @@ const getGameRoute = async (req, res, next)=>{
         const game = await getGame(req.params.rankingGameId);
         isPlayerOrOwner(game, res.locals.user);
         res.json(responseGame(game));
+    }catch(e){next(e)}
+}
+
+const getWinsRoute = async (req, res, next)=>{
+    try{
+        const game = await getGame(req.params.rankingGameId);
+        isPlayerOrOwner(game, res.locals.user);
+        const teams = await getTeams(game.league);
+        const teamWins = await getTeamWins(teams, game.season, game.part);
+        res.json(teamWins);
     }catch(e){next(e)}
 }
 
@@ -77,6 +89,21 @@ const getUser = async (id)=>{
 }
 
 /*
+ Retrieve list of teams
+ @param {String} league - League to get teams from. "all" for both leagues
+ @return {[Team]} Array of Teams
+ */
+const getTeams = async (league)=>{
+    let teams = [];
+    if(league === "all"){
+        teams = await Team.find({});
+    }else{
+        teams = await Team.find({league: league})
+    }
+    return teams;
+}
+
+/*
  Create a new game
  @param {Object} data - Data from the request
  @param {User} user - User object
@@ -89,6 +116,7 @@ const createGame = (data, user)=>{
         season: data.season,
         part: data.part,
         joinRequests: [],
+        league: data.league,
         joinByDate: new Date(data.joinByDate)
     });
 }
@@ -178,8 +206,63 @@ const isPlayerOrOwner = (game, user)=>{
     const userId = user._id.toString();
     if(
         !game.players.find(p => p.user.toString() === userId) &&
-        owner.toString() !== userId
+        game.owner.toString() !== userId
     ) throw new HttpError(403, "Forbidden");
+}
+
+/*
+ Check all games for team wins
+ Format data to list of teams with: id, name, location, league, wins
+ @param {[Team]} teams - List of team objects
+ @param {Number} season - Season (year)
+ @param {String} part - "full", "firstHalf", "secondHalf"
+ @return {[Object]} Array of modified Team objects
+ */
+const getTeamWins = async (teams, season, part)=>{
+    const startDate = new Date(season, 0, 0);
+    const endDate = new Date(season + 1, 0, 0);
+    const promises = [];
+    for(let i = 0; i < teams.length; i++){
+        const teamPromise = MlbGame.aggregate([
+            {$match: {
+                $or: [{"homeTeam.team": teams[i]._id}, {"awayTeam.team": teams[i]._id}],
+                date: {$gte: startDate, $lt: endDate},
+            }},
+            {$sort: {date: -1}}
+        ])
+            .then((games)=>{
+                const firstGame= part === "secondHalf" ? 81 : 0;
+                const lastGame = part === "firstHalf" ? 81 : games.length;
+
+                return {
+                    id: teams[i]._id.toString(),
+                    name: teams[i].name,
+                    location: teams[i].location,
+                    league: teams[i].league,
+                    wins: calculateWins(games.slice(firstGame, lastGame), teams[i]._id.toString())
+                };
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
+
+        promises.push(teamPromise);
+    }
+
+    return await Promise.all(promises);
+}
+
+const calculateWins = (games, teamId)=>{
+    let wins = 0;
+    for(let i = 0; i < games.length; i++){
+        if(games[i].homeTeam.team.toString() === teamId){
+            if(games[i].homeTeam.runs > games[i].awayTeam.runs) wins++;
+        }else{
+            if(games[i].awayTeam.runs > games[i].homeTeam.runs) wins++;
+        }
+    }
+
+    return wins;
 }
 
 /*
@@ -199,6 +282,7 @@ const responseGame = (game)=>{
 
 export {
     getGameRoute,
+    getWinsRoute,
     createGameRoute,
     joinRequestRoute,
     acceptRequestRoute,

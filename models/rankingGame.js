@@ -28,6 +28,11 @@ const RankingGameSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    //enum: "american", "national", "all"
+    league: {
+        type: String,
+        required: true
+    },
     joinRequests: {
         type: [mongoose.Schema.Types.ObjectId],
         required: false
