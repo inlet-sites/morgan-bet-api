@@ -4,6 +4,13 @@ import Team from "../models/mlbTeam.js";
 import MlbGame from "../models/mlbGame.js";
 import {HttpError} from "../HttpError.js";
 
+const getUserGamesRoute = async (req, res, next)=>{
+    try{
+        const games = await getGamesByUser(res.locals.user._id);
+        res.json(responseGames(games));
+    }catch(e){next(e)}
+}
+
 const getGameRoute = async (req, res, next)=>{
     try{
         const game = await getGame(req.params.rankingGameId);
@@ -74,6 +81,15 @@ const getGame = async (id)=>{
     const game = await Game.findOne({_id: id});
     if(!game) throw new HttpError(401, "No Ranking Game with this ID");
     return game;
+}
+
+/*
+ Retrieve a list of games for a user
+ @param {ObjectId} - ID of user
+ @return {[Game]} List of games
+ */
+const getGamesByUser = async (id)=>{
+    return await Game.find({"players.user": id});
 }
 
 /*
@@ -274,6 +290,7 @@ const calculateWins = (games, teamId)=>{
 const responseGame = (game)=>{
     return {
         id: game._id.toString(),
+        name: game.name,
         players: game.players,
         owner: game.owner.toString(),
         season: game.season,
@@ -281,7 +298,21 @@ const responseGame = (game)=>{
     };
 }
 
+/*
+ Create modified game objects for frontend from array of games
+ @param {[Game]} games - List of games
+ @return {[Object]} List of modified game objects
+ */
+const responseGames = (games)=>{
+    const rGames = [];
+    for(let i = 0; i < games.length; i++){
+        rGames.push(responseGame(games[i]));
+    }
+    return rGames;
+}
+
 export {
+    getUserGamesRoute,
     getGameRoute,
     getTeamsRoute,
     createGameRoute,

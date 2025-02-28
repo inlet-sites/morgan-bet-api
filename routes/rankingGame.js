@@ -1,5 +1,6 @@
 import auth from "../auth.js";
 import {
+    getUserGamesRoute,
     getGameRoute,
     getTeamsRoute,
     createGameRoute,
@@ -9,6 +10,7 @@ import {
 } from "../controllers/rankingGame.js";
 
 const rankingGameRoutes = (app)=>{
+    app.get("/rankinggame", auth(), getUserGamesRoute);
     app.get("/rankinggame/:rankingGameId", auth(), getGameRoute);
     app.get("/rankinggame/:rankingGameId/team", auth(), getTeamsRoute);
     app.post("/rankinggame", auth("createGame"), createGameRoute);
