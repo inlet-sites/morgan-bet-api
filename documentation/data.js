@@ -157,6 +157,11 @@ window.data = [
         description: "Ranking Game object",
         properties: [
             {
+                name: "id",
+                type: "String",
+                desc: "Unique id of the game"
+            },
+            {
                 name: "players",
                 type: "[Object]",
                 desc: "List of the players and their data"
