@@ -217,12 +217,49 @@ window.data = [
         title: "Get One",
         url: "GET /rankinggame/:rankingGameId",
         auth: true,
-        description: "Get a specific Ranking Game",
+        description: "Get a specific Ranking Game. Includes team data",
         responseBody: [{
             name: "N/A",
             type: "RankingGame",
             desc: "RankingGame object"
-        }]
+        }],
+        responseBody: [
+            {
+                name: "game",
+                type: "RankingGame",
+                desc: "RankingGame object"
+            },
+            {
+                name: "teams",
+                type: "[Object]",
+                desc: "Array of team data, including wins"
+            },
+            {
+                name: "teams.id",
+                type: "String",
+                desc: "ID of the team"
+            },
+            {
+                name: "teams.name",
+                type: "String",
+                desc: "Name of the team"
+            },
+            {
+                name: "teams.location",
+                type: "String",
+                desc: "Location of the team"
+            },
+            {
+                name: "teams.league",
+                type: "String",
+                desc: "League that the team is in"
+            },
+            {
+                name: "teams.win",
+                type: "String",
+                desc: "Number of games that the team has won"
+            }
+        ]
     },
     {
         type: "route",
@@ -236,41 +273,6 @@ window.data = [
             type: "[RankingGame]",
             desc: "Array of Ranking Games"
         }]
-    },
-    {
-        type: "route",
-        id: "rankingGameGetTeams",
-        title: "Get Team Data",
-        url: "GET /rankinggame/:rankingGameId/team",
-        auth: true,
-        description: "Get teams with list of wins. Reponse is an array of teams.",
-        responseBody: [
-            {
-                name: "id",
-                type: "String",
-                desc: "ID of the team"
-            },
-            {
-                name: "name",
-                type: "String",
-                desc: "Team name"
-            },
-            {
-                name: "location",
-                type: "String",
-                desc: "Team location"
-            },
-            {
-                name: "league",
-                type: "String",
-                desc: "League that the team is in"
-            },
-            {
-                name: "wins",
-                type: "Number",
-                desc: "Number of wins for this team in this game"
-            }
-        ]
     },
     {
         type: "route",

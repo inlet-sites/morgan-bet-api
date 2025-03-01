@@ -15,7 +15,12 @@ const getGameRoute = async (req, res, next)=>{
     try{
         const game = await getGame(req.params.rankingGameId);
         isPlayerOrOwner(game, res.locals.user);
-        res.json(responseGame(game));
+        const teams = await getTeams(game.league);
+        const teamWins = await getTeamWins(teams, game.season, game.part);
+        res.json({
+            game: game,
+            teams: teams
+        });
     }catch(e){next(e)}
 }
 
@@ -23,16 +28,6 @@ const getAvailableGamesRoute = async (req, res, next)=>{
     try{
         const games = await getAvailableGames(res.locals.user);
         res.json(responseGames(games));
-    }catch(e){next(e)}
-}
-
-const getTeamsRoute = async (req, res, next)=>{
-    try{
-        const game = await getGame(req.params.rankingGameId);
-        isPlayerOrOwner(game, res.locals.user);
-        const teams = await getTeams(game.league);
-        const teamWins = await getTeamWins(teams, game.season, game.part);
-        res.json(teamWins);
     }catch(e){next(e)}
 }
 
@@ -338,7 +333,6 @@ export {
     getUserGamesRoute,
     getGameRoute,
     getAvailableGamesRoute,
-    getTeamsRoute,
     createGameRoute,
     joinRequestRoute,
     acceptRequestRoute,
