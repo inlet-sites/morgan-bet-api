@@ -2,6 +2,7 @@ import auth from "../auth.js";
 import {
     getUserGamesRoute,
     getGameRoute,
+    getAvailableGamesRoute,
     getTeamsRoute,
     createGameRoute,
     joinRequestRoute,
@@ -11,6 +12,7 @@ import {
 
 const rankingGameRoutes = (app)=>{
     app.get("/rankinggame", auth(), getUserGamesRoute);
+    app.get("/rankinggame/available", auth(), getAvailableGamesRoute);
     app.get("/rankinggame/:rankingGameId", auth(), getGameRoute);
     app.get("/rankinggame/:rankingGameId/team", auth(), getTeamsRoute);
     app.post("/rankinggame", auth("createGame"), createGameRoute);

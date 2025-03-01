@@ -221,6 +221,19 @@ window.data = [
     },
     {
         type: "route",
+        id: "rankingGameAvailableGames",
+        title: "Get Available Games",
+        url: "GET /rakinggame/available",
+        auth: true,
+        description: "Get list of games available for the user to join. Response is an array",
+        responseBody: [{
+            name: "N/A",
+            type: "[RankingGame]",
+            desc: "Array of Ranking Games"
+        }]
+    },
+    {
+        type: "route",
         id: "rankingGameGetTeams",
         title: "Get Team Data",
         url: "GET /rankinggame/:rankingGameId/team",

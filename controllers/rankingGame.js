@@ -19,6 +19,14 @@ const getGameRoute = async (req, res, next)=>{
     }catch(e){next(e)}
 }
 
+const getAvailableGamesRoute = async (req, res, next)=>{
+    try{
+        const games = await getAvailableGames(res.locals.user);
+        console.log(games);
+        res.json(responseGames(games));
+    }catch(e){next(e)}
+}
+
 const getTeamsRoute = async (req, res, next)=>{
     try{
         const game = await getGame(req.params.rankingGameId);
@@ -90,6 +98,21 @@ const getGame = async (id)=>{
  */
 const getGamesByUser = async (id)=>{
     return await Game.find({"players.user": id});
+}
+
+/*
+ Get list of games available to join by the user
+ @param {User} user - User object
+ @return {[Game]} - List of games
+ */
+const getAvailableGames = async (user)=>{
+    const now = new Date();
+    return await Game.aggregate([
+        {$match: {
+            joinByDate: {$gt: now},
+            "players.user": {$ne: user._id}
+        }}
+    ]);
 }
 
 /*
@@ -314,6 +337,7 @@ const responseGames = (games)=>{
 export {
     getUserGamesRoute,
     getGameRoute,
+    getAvailableGamesRoute,
     getTeamsRoute,
     createGameRoute,
     joinRequestRoute,
