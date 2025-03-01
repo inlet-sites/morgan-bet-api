@@ -287,7 +287,12 @@ window.data = [
                 type: "Date",
                 desc: "Final date to join the game"
             }
-        ]
+        ],
+        responseBody: [{
+            name: "N/A",
+            type: "RankingGame",
+            desc: "Ranking Game object"
+        }]
     },
     {
         type: "route",
