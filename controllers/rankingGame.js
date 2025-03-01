@@ -22,7 +22,6 @@ const getGameRoute = async (req, res, next)=>{
 const getAvailableGamesRoute = async (req, res, next)=>{
     try{
         const games = await getAvailableGames(res.locals.user);
-        console.log(games);
         res.json(responseGames(games));
     }catch(e){next(e)}
 }
@@ -110,7 +109,8 @@ const getAvailableGames = async (user)=>{
     return await Game.aggregate([
         {$match: {
             joinByDate: {$gt: now},
-            "players.user": {$ne: user._id}
+            "players.user": {$ne: user._id},
+            "joinRequests": {$nin: [user._id]}
         }}
     ]);
 }
