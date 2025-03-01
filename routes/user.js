@@ -8,7 +8,7 @@ import {
 const userRoutes = (app)=>{
     app.post("/user", createUserRoute);
     app.post("/user/token", getTokenRoute);
-    app.get("/user/:userId", auth(), getUserRoute);
+    app.get("/user", auth(), getUserRoute);
 }
 
 export default userRoutes;

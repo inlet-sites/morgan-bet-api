@@ -117,6 +117,7 @@ const responseUser = (user)=>{
         id: user._id,
         name: user.name,
         email: user.email,
+        permissions: user.permissions
     };
 }
 

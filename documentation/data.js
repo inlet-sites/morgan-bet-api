@@ -91,7 +91,7 @@ window.data = [
         type: "route",
         id: "getUser",
         title: "Get User",
-        url: "GET /user/:userId",
+        url: "GET /user",
         auth: true,
         description: "Get user data",
         responseBody: [{
