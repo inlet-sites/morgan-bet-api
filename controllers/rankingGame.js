@@ -18,7 +18,7 @@ const getGameRoute = async (req, res, next)=>{
         const teams = await getTeams(game.league);
         const teamWins = await getTeamWins(teams, game.season, game.part);
         res.json({
-            game: game,
+            game: responseGame(game),
             teams: teamWins
         });
     }catch(e){next(e)}
@@ -91,7 +91,6 @@ const getGame = async (id, user)=>{
         });
     }
 
-    console.log(game);
     return game;
 }
 
@@ -101,7 +100,7 @@ const getGame = async (id, user)=>{
  @return {[Game]} List of games
  */
 const getGamesByUser = async (id)=>{
-    return await Game.find({"players.user": id});
+    return await Game.find({$or: [{"players.user": id}, {owner: id}]});
 }
 
 /*
@@ -332,7 +331,8 @@ const responseGame = (game)=>{
         players: game.players,
         owner: game.owner.toString(),
         season: game.season,
-        part: game.part
+        part: game.part,
+        joinRequests: game.joinRequests[0]?.name ? game.joinRequests : undefined
     };
 }
 
