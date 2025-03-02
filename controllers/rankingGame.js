@@ -13,7 +13,7 @@ const getUserGamesRoute = async (req, res, next)=>{
 
 const getGameRoute = async (req, res, next)=>{
     try{
-        const game = await getGame(req.params.rankingGameId);
+        let game = await getGame(req.params.rankingGameId, res.locals.user);
         isPlayerOrOwner(game, res.locals.user);
         const teams = await getTeams(game.league);
         const teamWins = await getTeamWins(teams, game.season, game.part);
@@ -77,11 +77,21 @@ const createPicksRoute = async (req, res, next)=>{
  Retrieve a game from the database
  Throws error if game doesn't exist
  @param {String} id - ID of the game
+ @param {User} user - Optional. User object if player requests are needed
  @return {Game} Game object
  */
-const getGame = async (id)=>{
-    const game = await Game.findOne({_id: id});
+const getGame = async (id, user)=>{
+    let game = await Game.findOne({_id: id});
     if(!game) throw new HttpError(401, "No Ranking Game with this ID");
+    if(game.owner.toString() === user?._id.toString()){
+        game = game.toObject();
+        game.joinRequests = await User.find({_id: game.joinRequests}, {
+            name: 1,
+            email: 1
+        });
+    }
+
+    console.log(game);
     return game;
 }
 
@@ -243,6 +253,16 @@ const isPlayerOrOwner = (game, user)=>{
         !game.players.find(p => p.user.toString() === userId) &&
         game.owner.toString() !== userId
     ) throw new HttpError(403, "Forbidden");
+}
+
+/*
+ Returns true if user is owner of game
+ @param {Game} - Game object
+ @param {User} - User object
+ @return {Boolean} True if owner of game
+ */
+const isOwner = (game, user)=>{
+    return game.owner.toString() === user._id.toString();
 }
 
 /*
