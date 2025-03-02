@@ -19,7 +19,7 @@ const getGameRoute = async (req, res, next)=>{
         const teamWins = await getTeamWins(teams, game.season, game.part);
         res.json({
             game: game,
-            teams: teams
+            teams: teamWins
         });
     }catch(e){next(e)}
 }
