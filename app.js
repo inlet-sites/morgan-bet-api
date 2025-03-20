@@ -16,7 +16,7 @@ global.cwd = import.meta.dirname;
 
 let mongoString = "mongodb://127.0.0.1/morganbet";
 if(process.env.NODE_ENV === "production"){
-    mongoString = `mongodb://website:${process.env.MONGODB_PASS}@127.0.0.1:27017/morganbet?authSource=admin`;
+    mongoString = `mongodb://morganbet:${process.env.MONGODB_PASS}@127.0.0.1:27017/morganbet?authSource=admin`;
 }
 mongoose.connect(mongoString);
 
