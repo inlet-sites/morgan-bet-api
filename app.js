@@ -3,7 +3,7 @@ import compression from "compression";
 import mongoose from "mongoose";
 import cors from "cors";
 import cron from "node-cron";
-import getGames from "./fetchData/updateGames.js";
+import getGames from "./fetchData/games.js";
 
 import {catchError} from "./HttpError.js";
 
