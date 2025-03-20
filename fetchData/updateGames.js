@@ -4,6 +4,7 @@ import Team from "../models/mlbTeam.js";
 import Game from "../models/mlbGame.js";
 
 export default async ()=>{
+    console.log("getGames run");
     let mongoString = "mongodb://127.0.0.1/morganbet";
     if(process.env.NODE_ENV === "product"){
         mongoString = `mongodb://website:${process.env.MONGODB_PASS}@127.0.0.1:27017/morganbet?authSource=admin`;
@@ -26,6 +27,7 @@ export default async ()=>{
     });
 
     const games = response.data.data;
+    console.log(games.length);
     const dbGames = [];
 
     for(let i = 0; i < games.length; i++){

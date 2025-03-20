@@ -2,6 +2,8 @@ import express from "express";
 import compression from "compression";
 import mongoose from "mongoose";
 import cors from "cors";
+import cron from "node-cron";
+import getGames from "./fetchData/updateGames.js";
 
 import {catchError} from "./HttpError.js";
 
@@ -27,6 +29,8 @@ mlbTeamRoutes(app);
 rankingGameRoutes(app);
 
 app.use(catchError);
+
+cron.schedule("0 9 * * *", getGames);
 
 if(process.env.NODE_ENV !== "production"){
     app.listen(8000);
