@@ -26,6 +26,7 @@ export default async ()=>{
         }
     });
 
+    console.log(response);
     const games = response.data.data;
     console.log(games.length);
     const dbGames = [];

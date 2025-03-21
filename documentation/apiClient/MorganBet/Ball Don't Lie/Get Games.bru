@@ -5,14 +5,13 @@ meta {
 }
 
 get {
-  url: https://api.balldontlie.io/mlb/v1/games?seasons[]=2024&per_page=100
+  url: https://api.balldontlie.io/mlb/v1/games?dates[]=2024-06-30
   body: none
   auth: none
 }
 
 params:query {
-  seasons[]: 2024
-  per_page: 100
+  dates[]: 2024-06-30
 }
 
 headers {
